@@ -1,3 +1,28 @@
+bind + resize +5
+bind - resize -5
+bind = resize =
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
+
+defscrollback 3000
+
+# F1-8 switch to those windows (OSX keeps 9-12 reserved for dashboard)
+bindkey "^[OP" select 0
+bindkey "^[OQ" select 1
+bindkey "^[OR" select 2
+bindkey "^[OS" select 3
+bindkey "^[[15~" select 4
+bindkey "^[[17~" select 5
+bindkey "^[[18~" select 6
+bindkey "^[[19~" select 7
+
+# navigating regions
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+
 screen vim ~/bcc
 split -v
 focus right
