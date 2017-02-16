@@ -1,0 +1,10 @@
+screen vim ~/bcc
+split -v
+focus right
+resize -h 70
+screen sudo su
+split
+focus down
+screen
+resize -v 25
+focus left
