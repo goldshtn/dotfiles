@@ -94,8 +94,6 @@ sudo cp -R ./perf-tools/bin /usr/share/perf-tools
 
 echo "Installing OpenJDK..."
 sudo dnf install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
-echo "Installing OpenJDK debuginfo..."
-sudo dnf debuginfo-install -y java-1.8.0-openjdk
 
 echo "Building perf-map-agent..."
 pushd perf-map-agent
