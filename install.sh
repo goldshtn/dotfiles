@@ -16,45 +16,9 @@ function die {
 	exit 1
 }
 
-function upgrade_kernel {
-    read -p "Your kernel is too old. Upgrade to latest mainline? [y/N] " -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-    else
-        curl -s https://repos.fedorapeople.org/repos/thl/kernel-vanilla.repo | sudo tee /etc/yum.repos.d/kernel-vanilla.repo
-        sudo dnf --enablerepo=kernel-vanilla-mainline update -y
-        echo "Reboot into the new kernel and then try this script again."
-        exit 1
-    fi
-}
-
-echo "Checking BPF config flags..."
-for flag in CONFIG_BPF CONFIG_BPF_SYSCALL CONFIG_BPF_JIT CONFIG_BPF_EVENTS; do
-    sysver=$(uname -r)
-    present=`sudo cat /boot/config-$sysver | grep $flag= | cut -d= -f2`
-    [[ "$present" = "y" ]] || die "$flag must be set"
-done
-
-echo "Checking if this version of Linux is supported..."
-(uname -r | grep "fc2[345]" -q) || \
-    die "Unsupported Linux version, only Fedora 23/24/25 is currently supported"
-
-echo "Checking if this version of the kernel is supported..."
-[[ $(uname -r) =~ ^([0-9]+)\.([0-9]+) ]]
-majver=${BASH_REMATCH[1]}
-minver=${BASH_REMATCH[2]}
-if [[ "$majver" -lt "4" ]]
-    then upgrade_kernel
-fi
-if [[ "$majver" -eq "4" && "$minver" -lt "6" ]]
-    then upgrade_kernel
-fi
-
 echo "Installing perf and kernel headers..."
-sudo dnf --enablerepo=kernel-vanilla-mainline install -y perf
-sudo dnf --enablerepo=kernel-vanilla-mainline --best --allowerasing \
-     install -y kernel-devel kernel-headers
+sudo dnf install -y perf
+sudo dnf --best --allowerasing install -y kernel-devel kernel-headers
 
 INSTALL_ROOT=~/src
 mkdir -p $INSTALL_ROOT || die "Unable to create installation directory"
