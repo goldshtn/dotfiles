@@ -1,7 +1,9 @@
 echo "Installing basics..."
+sudo dnf update -y
 sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen ack
 
 echo "Copying dotfiles..."
+pushd $(dirname)
 cp .bashrc ~/.bashrc
 cp .vimrc ~/.vimrc
 cp .inputrc ~/.inputrc
@@ -73,3 +75,4 @@ sudo bash -c 'cat >> /etc/profile << \EOF
   PATH=$PATH:/usr/share/bcc/tools:/usr/share/perf-tools
   MANPATH=$MANPATH:/usr/share/bcc/man/man8
 EOF'
+popd
