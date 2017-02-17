@@ -1,5 +1,5 @@
 echo "Installing basics..."
-sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen
+sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen ack
 
 echo "Copying dotfiles..."
 cp .bashrc ~/.bashrc
@@ -27,6 +27,8 @@ pushd $INSTALL_ROOT
 git clone https://github.com/goldshtn/bcc
 pushd bcc
 git remote add upstream https://github.com/iovisor/bcc
+git fetch upstream
+git merge upstream/master
 ctags -R .
 popd
 git clone --depth=1 https://github.com/brendangregg/FlameGraph
