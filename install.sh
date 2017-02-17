@@ -5,7 +5,7 @@ sudo dnf update -y
 sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen ack
 
 echo "Copying dotfiles..."
-$(dirname)/install-dotfiles.sh
+$(dirname $0)/install-dotfiles.sh
 
 mkdir -p ~/.vim
 git clone --depth=1 https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim

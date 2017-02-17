@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd $(dirname)
+pushd $(dirname $0)
 cp .bashrc ~/.bashrc
 cp .vimrc ~/.vimrc
 cp .inputrc ~/.inputrc
