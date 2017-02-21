@@ -15,7 +15,6 @@ function upgrade_kernel {
     else
         curl -s https://repos.fedorapeople.org/repos/thl/kernel-vanilla.repo | sudo tee /etc/yum.repos.d/kernel-vanilla.repo
         sudo dnf --enablerepo=kernel-vanilla-mainline update -y
-        echo "Reboot into the new kernel and then try this script again."
         exit 1
     fi
 }
@@ -38,6 +37,6 @@ minver=${BASH_REMATCH[2]}
 if [[ "$majver" -lt "4" ]]
     then upgrade_kernel
 fi
-if [[ "$majver" -eq "4" && "$minver" -lt "6" ]]
+if [[ "$majver" -eq "4" && "$minver" -lt "9" ]]
     then upgrade_kernel
 fi
