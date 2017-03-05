@@ -2,7 +2,7 @@
 
 echo "Installing basics..."
 sudo dnf update -y
-sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen ack
+sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen ack atop
 
 echo "Copying dotfiles..."
 $(dirname $0)/install-dotfiles.sh
