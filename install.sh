@@ -7,6 +7,9 @@ sudo dnf install -y ctags curl git vim wget ncurses-devel sysstat screen ack ato
 echo "Copying dotfiles..."
 $(dirname $0)/install-dotfiles.sh
 
+git config --global user.email "goldshtn@gmail.com"
+git config --global user.name "Sasha Goldshtein"
+
 mkdir -p ~/.vim
 git clone --depth=1 https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
 git clone --depth=1 https://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
@@ -73,3 +76,7 @@ sudo bash -c 'cat >> /etc/profile << \EOF
   PATH=$PATH:/usr/share/bcc/tools:/usr/share/perf-tools
   MANPATH=$MANPATH:/usr/share/bcc/man/man8
 EOF'
+
+if [[ "$WORKSHOP" == "1" ]]; then
+    $(dirname $0)/install-workshop.sh
+fi

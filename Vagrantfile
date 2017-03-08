@@ -14,6 +14,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    export WORKSHOP=#{ENV['WORKSHOP']}
+    if [[ "$WORKSHOP" == "1" ]]; then echo "Provisioning in workshop mode"; fi
     /setup/install.sh
   SHELL
 end
