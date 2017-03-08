@@ -15,4 +15,4 @@ if [[ "$1" == "--workshop" ]]; then
 fi
 
 vagrant up
-vagrant ssh
+vagrant ssh -c 'screen -RR -D'
